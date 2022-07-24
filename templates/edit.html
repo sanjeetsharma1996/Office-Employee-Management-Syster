@@ -1,0 +1,30 @@
+{% extends 'index.html' %}<!--index data use/include-->
+{% block title %} Update Employee {% endblock title %}<!--Over Write Title-->
+
+{%block content %} 
+  <div class="container mb-5">
+    <h1 class="alert-danger text-center text-danger p-3">Update Employee</h1>
+    <div class="row">
+      <div class="col-sm-8">
+<!--Resume form make -->
+      <form action=''  method="post" enctype="multipart/form-data" class="shadow p-5" >
+        {% csrf_token %}
+        
+        {% for fm in form %}
+          <div class="form-group mb-3">
+          {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+          </div>
+        {% endfor %}
+<!--submit Buttob -->
+        <input type="submit" value="Submit" class="btn btn-primary">
+<!--Error handling -->
+        {% if form.non_field_errors %}
+          {% for error in form.non_field_errors %}
+          <p class="alert alert-danger my-3">{{error}}</p>
+          {% endfor %}
+        {% endif %}
+      </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
